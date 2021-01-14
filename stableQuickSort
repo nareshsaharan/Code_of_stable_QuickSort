@@ -1,0 +1,100 @@
+
++//The code uses middle element as pivot. 
+
+import java.util.*;
+public class MyClass 
+{
+    public static ArrayList<Integer> quickSort(ArrayList<Integer> ar)
+    {
+        // Base case 
+        if(ar.size() <= 1)
+        {
+            return ar;
+        }
+        else
+        {
+            // Let us choose middle element a pivot 
+            
+            int mid = ar.size()/2;
+            int pivat = ar.get(mid);
+            
+           // key element is used to break the array 
+ 	       // into 2 halves according to their values 
+ 	       ArrayList<Integer> smaller = new ArrayList<>();
+ 	       ArrayList<Integer> greater = new ArrayList<>();
+ 	       
+ 	       // Put greater elements in greater list, 
+	       // smaller elements in smaller list. Also, 
+		   // compare positions to decide where to put. 
+		
+		   for(int ind = 0; ind < ar.size(); ind++)
+		   {
+		       int val = ar.get(ind);
+		       if( ind != mid )
+		       {
+		           if( val < pivat )
+		           {
+		               smaller.add(val);
+		           }
+		           else if(val > pivat)
+		           {
+		               greater.add(val);
+		           }
+		           else
+		           {
+		               // If value is same, then considering 
+			           // position to decide the list. 
+			           
+		               if(ind < mid)
+		               {
+		                   smaller.add(val);
+		               }
+		               else
+		               {
+		                   greater.add(val);
+		               }
+		           }
+		       }
+		   }
+		   
+		   ArrayList<Integer> ans = new ArrayList<Integer>();
+		       
+	       ArrayList<Integer> sa1 = quickSort(smaller);
+	       ArrayList<Integer> sa2 = quickSort(greater);
+	       
+	       // add all elements of smaller list into ans list
+	       for(Integer val1 : sa1)
+	            ans.add(val1);
+	            
+	       // add pivat element into ans list    
+	       ans.add(pivat);
+	       
+	       // add all elements of greater list into ans list
+	       for(Integer val2 : sa2)
+	            ans.add(val2);
+	       
+	       // return ans list
+	       return ans;
+ 		
+        }
+        
+    }
+    
+    // Driver code to test above 
+    public static void main(String args[]) 
+    {
+        
+        int ar[] = {10, 7, 8, 9, 1, 5};
+        ArrayList<Integer> al = new ArrayList<>();
+        al.add(10);
+        al.add(7);
+        al.add(8);
+        al.add(9);
+        al.add(1);
+        al.add(5);
+        
+        ArrayList<Integer> sortedAr = quickSort(al);
+        
+        System.out.println(sortedAr);
+    }
+}
